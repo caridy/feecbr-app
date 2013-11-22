@@ -1,1 +1,6 @@
-<p>this is the photo page</p>
+<p>These are {{count}} images:</p>
+
+{{#photos}}
+    <h2>{{title}} ({{from}})</h2>
+    <p><a href="{{link}}"><img width="400" src="{{src}}"/></a></p>
+{{/photos}}
