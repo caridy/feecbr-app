@@ -1,12 +1,53 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>FEECBR Demo App</title>
+
+    <title>feecbr workshop demo</title>
+    <meta name="description" content="modown mojito" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+
 </head>
 <body>
 
-    {{{body}}}
+    <div id="pn-container">
+
+        <div class="header">
+            <div class="pure-menu pure-menu-open pure-menu-horizontal">
+                <a class="pure-menu-heading" href="/">Home</a>
+                <ul>
+                    <li><a href="/photos">Photos</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="pn-view-container">
+            {{{viewOutlet}}}
+        </div>
+
+    </div>
+
+    <script>{{{state}}}</script>
+    <script>
+            app.yui.use('feecbr-app', 'router-middleware', function (PN) {
+                var FeecBRAppClass = PN.config.global.FeecBRAppClass,
+                    pageView;
+    
+                pageView = new FeecBRAppClass({
+                    container: '#pn-container',
+                    viewContainer: '#pn-view-container',
+                    transitions: true,
+                    root: '/',
+                    serverRouting: true
+                });
+    
+                app.rehydrate(pageView);
+            });
+    </script>
 
 </body>
 </html>

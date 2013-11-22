@@ -16,6 +16,16 @@ locator.extend(app);
 expview.extend(app);
 expyui.extend(app);
 
+// this is for development mode locally
+if ('development' == app.get('env')) {
+    app.use(expyui['static'](__dirname + '/build'));
+    app.yui.setCoreFromAppOrigin();
+    app.yui.applyConfig({
+        debug: true,
+        combine: false
+    });
+}
+
 app.expose({}, 'DATA');
 
 // express middlewares
@@ -34,7 +44,7 @@ app.yui.ready(function(err) {
     app.yui.use('feecbr-app');
 
     // default pages
-    app.page('photo', '/photos');
+    app.page('photos', '/photos');
     app.page('home', '/');
 
     app.listen(3000, function () {
