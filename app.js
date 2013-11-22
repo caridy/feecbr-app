@@ -1,36 +1,44 @@
 var express = require('express'),
-    exphbs = require('express3-handlebars'),
+    expyui = require('express-yui'),
+    expview = require('express-view'),
+    locator = require('./locator.js'),
+    librouter = require('feecbr-lib').router,
+    libapp = require('feecbr-lib').application,
     app = express();
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+app.set('app port', 3000);
+app.set('layout', 'main');
 
-app.get('/', function (request, response, next) {
-    response.render('home');
-});
+// express extension
+libapp.extend(app);
+librouter.extend(app);
+locator.extend(app);
+expview.extend(app);
+expyui.extend(app);
 
-app.get('/photos', function (request, response, next) {
-    response.render('photos', {
-        count: 3,
-        photos: [{
-            "from": "FEEC images",
-            "title": "Workshop",
-            "src": "https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-frc3/q75/s720x720/1472977_633433723380215_434696798_n.jpg",
-            "link": "http://feecbr.com.br/pt"
-        }, {
-            "from": "yahoo images",
-            "title": "photo two",
-            "src": "http://www.exit-brasil.org/foto/logo.jpg",
-            "link": "http://yahoo.com"
-        }, {
-            "from": "google images",
-            "title": "photo three",
-            "src": "http://www.exit-brasil.org/foto/logo.jpg",
-            "link": "http://google.com"
-        }]
+app.expose({}, 'DATA');
+
+// express middlewares
+app.use(librouter.expose());
+
+app.yui.ready(function(err) {
+
+    if (err) {
+        console.error('we are screwed!');
+        console.log(err);
+        console.log(err.stack);
+        return;
+    }
+
+    // getting all modules provisioned for the server side
+    app.yui.use('feecbr-app');
+
+    // default pages
+    app.page('photo', '/photos');
+    app.page('home', '/');
+
+    app.listen(3000, function () {
+        console.log('app serving on port 3000');
     });
-});
 
-app.listen(3000, function () {
-    console.log('app serving on port 3000');
 });
