@@ -10,7 +10,25 @@ app.get('/', function (request, response, next) {
 });
 
 app.get('/photos', function (request, response, next) {
-    response.render('photos');
+    response.render('photos', {
+        count: 3,
+        photos: [{
+            "from": "brasil images",
+            "title": "photo one",
+            "src": "http://www.exit-brasil.org/foto/logo.jpg",
+            "link": "http://feecbr.com.br/pt"
+        }, {
+            "from": "yahoo images",
+            "title": "photo two",
+            "src": "http://www.exit-brasil.org/foto/logo.jpg",
+            "link": "http://yahoo.com"
+        }, {
+            "from": "google images",
+            "title": "photo three",
+            "src": "http://www.exit-brasil.org/foto/logo.jpg",
+            "link": "http://google.com"
+        }]
+    });
 });
 
 app.listen(3000, function () {
