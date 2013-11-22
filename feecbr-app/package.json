@@ -1,0 +1,28 @@
+{
+  "name": "feecbr-app",
+  "version": "0.0.1",
+  "description": "workshop app demo",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.4.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/caridy/feecbr-app.git"
+  },
+  "keywords": [
+    "feecbr",
+    "nodejs",
+    "workshop",
+    "training"
+  ],
+  "author": "Caridy Patino <caridy@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caridy/feecbr-app/issues"
+  }
+}
