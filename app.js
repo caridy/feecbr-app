@@ -18,5 +18,9 @@
     app.get('/photos', function (request, response, next) {
         response.render('photos');
     });
+    
+    app.listen(3000, function () {
+        console.log('app serving on port 3000');
+    });
         
 }());
